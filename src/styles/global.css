@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paleta Boutique: Elegancia y Calidez */
+  --color-primary: #1c1c1c;    /* Negro suave */
+  --color-secondary: #fdfbf7;  /* Blanco Crema (Papel antiguo muy sutil) */
+  --color-accent: #c4a484;     /* Beige/Dorado suave (Camel) */
+  --color-accent-dark: #a38466;
+  
+  /* Fuentes */
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Lato", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+}
+
+/* === BOTONES BOUTIQUE === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 2rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  border-radius: 0px; /* Bordes rectos para elegancia */
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 1;
+}
+
+/* Estilo Primario (Fondo Negro, Texto Blanco) */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  border: 1px solid var(--color-primary);
+}
+.btn-primary:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: white;
+}
+
+/* Estilo Elegante (Borde) */
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+.btn-outline:hover {
+  background-color: var(--color-primary);
+  color: white;
+}

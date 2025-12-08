@@ -1,0 +1,123 @@
+<script is:inline>
+  // Script robusto para Ledesma & Morel
+  document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- 1. LÓGICA DE SCROLL ---
+    const header = document.querySelector('header'); // Seleccionamos la etiqueta header directamente
+    const scrollThreshold = 10;
+
+    function handleScroll() {
+      if (window.scrollY > scrollThreshold) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+    }
+
+    // Escuchar scroll
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Ejecutar al inicio por si ya estamos abajo
+    handleScroll();
+
+
+    // --- 2. LÓGICA DE MENÚ MÓVIL ---
+    const btnOpen = document.getElementById('btn-open');
+    const btnClose = document.getElementById('btn-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    function openMenu() {
+      mobileMenu.classList.remove('translate-x-full');
+      document.body.style.overflow = 'hidden'; // Bloquear scroll
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.add('translate-x-full');
+      document.body.style.overflow = ''; // Reactivar scroll
+    }
+
+    if (btnOpen) btnOpen.addEventListener('click', openMenu);
+    if (btnClose) btnClose.addEventListener('click', closeMenu);
+    
+    // Cerrar al hacer click en un link
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+  });
+</script>
+
+<style>
+  /* === ESTILOS BASE === */
+  header {
+    height: 90px;
+    background-color: transparent; /* Transparente en Desktop al inicio */
+    transition: all 0.3s ease-in-out;
+    border-bottom: 1px solid transparent;
+  }
+
+  /* === ESTILO SCROLLED (Cuando bajas) === */
+  /* Usamos !important para asegurar que pise cualquier otra cosa */
+  header.is-scrolled {
+    height: 70px;
+    background-color: #fdfbf7 !important; /* BLANCO CREMA SÓLIDO */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  /* === AJUSTE MÓVIL (Celulares) === */
+  @media (max-width: 1024px) {
+    /* En móvil, forzamos fondo sólido SIEMPRE para evitar problemas de lectura */
+    header {
+      background-color: #fdfbf7 !important;
+      height: 70px !important;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+  }
+</style>
+
+<header class="fixed top-0 w-full z-50 flex items-center">
+  <div class="max-w-7xl mx-auto px-6 w-full flex items-center justify-between">
+    
+    <a href="#inicio" class="flex flex-col group relative z-[60]">
+      <h1 class="font-serif text-xl md:text-2xl text-[#1c1c1c] font-bold tracking-wide">
+        LM <span class="font-sans text-xs font-light text-[#c4a484]">&</span> ASOCIADOS
+      </h1>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-10 font-sans text-xs font-bold tracking-[0.2em] uppercase text-[#1c1c1c]">
+      <a href="#inicio" class="hover:text-[#c4a484] transition-colors">Inicio</a>
+      <a href="#nosotras" class="hover:text-[#c4a484] transition-colors">Nosotras</a>
+      <a href="#servicios" class="hover:text-[#c4a484] transition-colors">Servicios</a>
+      <a href="#contacto" class="px-6 py-3 bg-[#1c1c1c] text-white hover:bg-[#c4a484] transition-colors">
+        Contactar
+      </a>
+    </nav>
+    
+    <button id="btn-open" class="lg:hidden text-[#1c1c1c] p-2 focus:outline-none z-[60]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg>
+    </button>
+  </div>
+</header>
+
+<div id="mobile-menu" class="fixed inset-0 bg-[#1c1c1c] z-[100] w-full h-screen flex flex-col p-8 transition-transform duration-300 translate-x-full lg:hidden">
+  
+  <div class="flex items-center justify-between mb-12">
+    <span class="font-serif text-2xl text-[#c4a484]">LM & ASOC.</span>
+    <button id="btn-close" class="text-white hover:text-[#c4a484] transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+    </button>
+  </div>
+  
+  <nav class="flex flex-col gap-8 text-center mt-4">
+    <a href="#inicio" class="mobile-link text-3xl font-serif text-white hover:text-[#c4a484] transition-colors">Inicio</a>
+    <a href="#nosotras" class="mobile-link text-3xl font-serif text-white hover:text-[#c4a484] transition-colors">Nosotras</a>
+    <a href="#servicios" class="mobile-link text-3xl font-serif text-white hover:text-[#c4a484] transition-colors">Servicios</a>
+    <a href="#contacto" class="mobile-link text-3xl font-serif text-white hover:text-[#c4a484] transition-colors">Contacto</a>
+  </nav>
+
+  <div class="mt-auto mb-8">
+      <a href="https://wa.me/" class="block w-full py-4 bg-[#c4a484] text-[#1c1c1c] font-bold text-center uppercase tracking-widest text-sm hover:bg-white transition-colors">
+         WhatsApp
+      </a>
+  </div>
+</div>

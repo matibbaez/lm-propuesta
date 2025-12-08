@@ -1,0 +1,39 @@
+---
+import "../styles/global.css";
+interface Props { title: string; }
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Ledesma, Morel & Asociados. Abogadas UBA. Empatía y comprensión en la defensa de sus derechos." />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script is:inline src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script is:inline>
+      const lenis = new Lenis({ duration: 1.5, smoothWheel: true }); // Scroll muy suave y lento
+      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+      
+      // Fix para anclas
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link && link.getAttribute('href')?.startsWith('#')) {
+          e.preventDefault();
+          lenis.scrollTo(link.getAttribute('href'));
+        }
+      });
+    </script>
+    <title>{title} | Ledesma Morel</title>
+  </head>
+  <body class="antialiased">
+    <slot />
+  </body>
+</html>
